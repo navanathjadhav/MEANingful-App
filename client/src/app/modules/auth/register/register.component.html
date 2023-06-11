@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-content">
+    <article class="message is-success" *ngIf="successMessage">
+      <div class="message-header">
+        <p>Success</p>
+      </div>
+      <div class="message-body">
+        {{successMessage}}
+      </div>
+    </article>
+    <p class="title" *ngIf="!successMessage">Sign Up</p>
+    <article class="message is-danger" *ngIf="errorMessage">
+      <div class="message-header">
+        <p>Oops!</p>
+        <button class="delete" aria-label="delete" (click)="errorMessage = ''"></button>
+      </div>
+      <div class="message-body">
+        {{errorMessage}}
+      </div>
+    </article>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()" *ngIf="!successMessage">
+      <div class="field">
+        <div class="control">
+          <label class="label" for="name">Name</label>
+          <input type="text" class="input" formControlName="name" [ngClass]="{
+              'is-danger':
+                registerForm.controls['name'].touched &&
+                registerForm.controls['name'].invalid,
+              'is-success': registerForm.controls['name'].valid
+            }">
+          <p *ngIf="registerForm.controls['name'].touched &&
+            registerForm.controls['name'].invalid" class="help is-danger">This name is invalid</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="label" for="company">Company</label>
+          <input type="text" class="input" formControlName="company" [ngClass]="{
+              'is-danger':
+                registerForm.controls['company'].touched &&
+                registerForm.controls['company'].invalid,
+              'is-success': registerForm.controls['company'].valid
+            }">
+          <p *ngIf="registerForm.controls['company'].touched &&
+            registerForm.controls['company'].invalid" class="help is-danger">This company is invalid</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="label" for="email">Email</label>
+          <input type="email" class="input" formControlName="email" [ngClass]="{
+              'is-danger':
+                registerForm.controls['email'].touched &&
+                registerForm.controls['email'].invalid,
+              'is-success': registerForm.controls['email'].valid
+            }">
+          <p *ngIf="registerForm.controls['email'].touched &&
+            registerForm.controls['email'].invalid" class="help is-danger">This email is invalid</p>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="label" for="password">Password</label>
+          <input type="password" class="input" formControlName="password" [ngClass]="{
+              'is-danger':
+                registerForm.controls['password'].touched &&
+                registerForm.controls['password'].invalid,
+              'is-success': registerForm.controls['password'].valid
+            }">
+          <p *ngIf="registerForm.controls['password'].touched &&
+            registerForm.controls['password'].invalid" class="help is-danger">Password is required</p>
+        </div>
+      </div>
+
+      <button class="button is-fullwidth is-primary mt-5" [ngClass]="{ 'is-loading': isLoading }"
+        type="submit">Signup</button>
+
+      <div class="is-flex is-justify-content-center mt-3">
+        <span class="has-text-grey">Already have an Account?</span> &nbsp; <a [routerLink]="['/auth/login']">Login</a>
+      </div>
+    </form>
+
+  </div>
+</div>

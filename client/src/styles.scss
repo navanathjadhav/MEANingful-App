@@ -1,3 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* Imported bulma sass */
 @import "../node_modules/bulma/bulma.sass";
+body {
+  background: #f5f8fa;
+  height: 100vh;
+}
