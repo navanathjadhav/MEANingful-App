@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,13 +14,10 @@ export class ResetPasswordComponent implements OnInit {
   successMessage!: string
   token!: string
 
-  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.token = params['token']
-    })
   }
 
   initForm() {
@@ -45,7 +41,10 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     this.isLoading = true
-    this.successMessage = 'Your password has been changed, please login.'
-  }
 
+    setTimeout(() => {
+      this.successMessage = 'Your password has been changed, please login.'
+      this.isLoading = false;
+    }, 2000);
+  }
 }

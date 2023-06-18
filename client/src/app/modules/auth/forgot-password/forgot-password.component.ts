@@ -41,7 +41,10 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     this.isLoading = true
-    this.successMessage = 'We have sent you the reset password link on given email.'
+    setTimeout(() => {
+      this.successMessage = 'We have sent you the reset password link on given email.'
+      this.isLoading = false;
+    }, 2000);
   }
 
 }

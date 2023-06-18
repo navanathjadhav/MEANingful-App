@@ -4,10 +4,27 @@
   <ul>
     <li>Building Blocks</li>
     <ul>
-      <li>Components</li>
-      <li>Modules</li>
-      <li>Metadata</li>
-      <li>Templates</li>
+      <li>Services</li>
+      <li>Data Binding</li>
+      <li>Dependency Injection</li>
+      <li>Types</li>
+      <li>Environments</li>
+      <li>HttpClient</li>
     </ul>
   </ul>
+</div>
+
+
+<p class="title">Latest SpaceX Launches</p>
+<div *ngIf="launch" class="card">
+  <div class="card-image">
+    <figure class="image">
+      <img src="{{launch.links.patch.small}}" width="200" alt="Placeholder image">
+    </figure>
+  </div>
+  <div class="card-content">
+    <h5>{{launch.name}}</h5>
+    <div>Date: {{ launch.date_local | date }}</div>
+    <div class="is-muted">{{launch.details}}</div>
+  </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   errorMessage!: string
   successMessage!: string
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -68,6 +67,9 @@ export class RegisterComponent implements OnInit {
 
     this.isLoading = true
 
-    this.router.navigate(['/home'])
+    setTimeout(() => {
+      this.successMessage = `You have been registered successfully, please verify your email to activate the account.`
+      this.isLoading = false;
+    }, 2000);
   }
 }
