@@ -10,12 +10,12 @@ import { User } from 'src/app/modules/auth/types/user';
 export class HeaderComponent implements OnInit {
 
   currentUser!: User
-  currentActiveUserCount!: number
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.currentUser = this.authService.getCurrentUser() as any
+    this.authService.getCurrentUser().subscribe((user: User) => {
+      this.currentUser = user;
+    });
   }
 
   logout() {
