@@ -4,27 +4,25 @@
   <ul>
     <li>Building Blocks</li>
     <ul>
-      <li>Services</li>
-      <li>Data Binding</li>
-      <li>Dependency Injection</li>
-      <li>Types</li>
-      <li>Environments</li>
-      <li>HttpClient</li>
+      <li>Directives</li>
     </ul>
   </ul>
-</div>
 
-
-<p class="title">Latest SpaceX Launches</p>
-<div *ngIf="launch" class="card">
-  <div class="card-image">
-    <figure class="image">
-      <img src="{{launch.links.patch.small}}" width="200" alt="Placeholder image">
-    </figure>
-  </div>
-  <div class="card-content">
-    <h5>{{launch.name}}</h5>
-    <div>Date: {{ launch.date_local | date }}</div>
-    <div class="is-muted">{{launch.details}}</div>
+  <h2 class="title">SpaceX Ships</h2>
+  <div class="columns is-multiline">
+    <div *ngFor="let ship of ships" class="column is-3">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img src="{{ship.image}}" alt="{{ship.name}}">
+          </figure>
+        </div>
+        <div class="card-content">
+          <h5>{{ship.name}}</h5>
+          <div>Year: {{ ship.year_built }}</div>
+          <div [randomColor]="ship.roles"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

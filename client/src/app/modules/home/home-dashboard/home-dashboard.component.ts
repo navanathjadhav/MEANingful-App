@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Launch } from '../types/home';
+import { Ship } from '../types/home';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,14 +9,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home-dashboard.component.scss']
 })
 export class HomeDashboardComponent implements OnInit {
-  launch!: Launch
-  showDrinkWater!: boolean
+  ships: Ship[] = []
   constructor(private http: HttpClient) { }
 
-  getSpaceXLaunches() {
+  getSpaceXShips() {
     this.http.get(environment.SPACEX_API_URL).subscribe({
-      next: (launchResponse) => {
-        this.launch = launchResponse as Launch
+      next: (shipsResponse) => {
+        this.ships = shipsResponse as any
       },
       error: (error) => {
         console.log(error.message)
@@ -25,7 +24,7 @@ export class HomeDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSpaceXLaunches();
+    this.getSpaceXShips();
   }
 
 }
