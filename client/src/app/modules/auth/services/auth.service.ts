@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { User } from '../types/user';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/state/app.state';
+import * as UserActions from './../../../store/actions/user.actions';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +20,15 @@ export class AuthService {
     id: "1001"
   }
 
-  private userSubject: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
+  currentUser$!: Observable<User>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<AppState>) {
+    this.store.dispatch(new UserActions.CurrentUser(this.user))
+    this.currentUser$ = this.store.select('userStore');
+  }
 
   login() {
     this.afterLogin(this.user)
-  }
-
-  getCurrentUser() {
-    return this.userSubject.asObservable();
   }
 
   register() {
@@ -33,11 +36,12 @@ export class AuthService {
   }
 
   logout() {
+    this.store.dispatch(new UserActions.Logout(undefined))
     this.router.navigate(['/auth/login'])
   }
 
   afterLogin(user: User) {
-    this.userSubject.next(user);
+    this.store.dispatch(new UserActions.CurrentUser(user))
     if (user.id) {
       this.router.navigate([environment.DEFAULT_POST_LOGIN_URL])
     }
