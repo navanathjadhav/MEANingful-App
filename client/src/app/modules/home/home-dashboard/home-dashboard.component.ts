@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ship } from '../types/home';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -10,12 +11,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeDashboardComponent implements OnInit {
   ships: Ship[] = []
+  latestShips: Ship[] = []
   constructor(private http: HttpClient) { }
 
   getSpaceXShips() {
     this.http.get(environment.SPACEX_API_URL).subscribe({
       next: (shipsResponse) => {
         this.ships = shipsResponse as any
+        this.latestShips = _.filter(shipsResponse, ((data: Ship) => data.year_built >= 2015)) as any
       },
       error: (error) => {
         console.log(error.message)

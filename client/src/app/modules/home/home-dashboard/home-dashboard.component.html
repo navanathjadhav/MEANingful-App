@@ -2,13 +2,30 @@
 <div class="content">
   <h2 class="title">What's added</h2>
   <ul>
-    <li>State Management</li>
+    <li>Utility Libraries</li>
     <ul>
-      <li>@ngrx</li>
+      <li>Lodash</li>
     </ul>
   </ul>
 
-  <h2 class="title">SpaceX Ships</h2>
+  <h2 class="title">SpaceX Latest Ships</h2>
+  <div class="columns is-multiline">
+    <div *ngFor="let ship of latestShips" class="column is-3">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img src="{{ship.image}}" alt="{{ship.name}}">
+          </figure>
+        </div>
+        <div class="card-content">
+          <h5>{{ship.name}}</h5>
+          <div>Year: {{ ship.year_built }}</div>
+          <div [randomColor]="ship.roles"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="title">SpaceX All Ships</h2>
   <div class="columns is-multiline">
     <div *ngFor="let ship of ships" class="column is-3">
       <div class="card">
