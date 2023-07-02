@@ -16,7 +16,7 @@ const routes = {
       ul: {
         li: "Node Basics",
         ul: {
-          li: ["Module System"],
+          li: ["Event Emitter"],
         },
       },
     };
