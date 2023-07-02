@@ -59,7 +59,7 @@ const routes = {
       ul: {
         li: "Node Basics",
         ul: {
-          li: ["REST", "Callbacks"],
+          li: ["Process Object"],
         },
       },
     };
@@ -69,7 +69,9 @@ const routes = {
 };
 
 // Start the server
-const port = 3000;
+// Get the port from the environment process object or use a default value
+const port = process.env.PORT || 3000;
+
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
