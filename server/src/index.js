@@ -11,17 +11,13 @@ const server = http.createServer((req, res) => {
   const method = req.method.toLowerCase();
   const queryParams = parsedUrl.query;
 
-  const decoder = new StringDecoder("utf-8");
-  let buffer = "";
-
-  req.on("data", (data) => {
-    buffer += decoder.write(data);
+  const body = [];
+  req.on("data", (chunk) => {
+    body.push(chunk);
   });
 
   req.on("end", () => {
-    buffer += decoder.end();
-
-    const requestHandler = routes[path] || routes.default;
+    const buffer = Buffer.concat(body);
     const data = {
       path,
       method,
@@ -30,6 +26,8 @@ const server = http.createServer((req, res) => {
     };
 
     eventEmitter.emit("request", data);
+
+    const requestHandler = routes[path] || routes.default;
     requestHandler(data, (statusCode, responsePayload) => {
       statusCode = typeof statusCode === "number" ? statusCode : 200;
       responsePayload =
