@@ -1,6 +1,7 @@
 const http = require("http");
 const { parse } = require("url");
 const { StringDecoder } = require("string_decoder");
+const routes = require("./routes");
 
 const server = http.createServer((req, res) => {
   const parsedUrl = parse(req.url, true);
@@ -39,34 +40,6 @@ const server = http.createServer((req, res) => {
     });
   });
 });
-
-// Define your routes
-const routes = {
-  hello: (data, callback) => {
-    const message = { message: "Hello, World!" };
-    callback(200, message);
-  },
-  users: (data, callback) => {
-    const users = [
-      { id: 1, name: "Navanath Jadhav" },
-      { id: 2, name: "Akshay Gudhate" },
-    ];
-    callback(200, users);
-  },
-  default: (data, callback) => {
-    const message = {
-      h2: "What's added",
-      ul: {
-        li: "Node Basics",
-        ul: {
-          li: ["Process Object"],
-        },
-      },
-    };
-
-    callback(200, message);
-  },
-};
 
 // Start the server
 // Get the port from the environment process object or use a default value
