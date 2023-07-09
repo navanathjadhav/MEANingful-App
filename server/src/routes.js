@@ -1,28 +1,32 @@
-const routes = {
-  hello: (data, callback) => {
-    const message = { message: "Hello, World!" };
-    callback(200, message);
-  },
-  users: (data, callback) => {
-    const users = [
-      { id: 1, name: "Navanath Jadhav" },
-      { id: 2, name: "Akshay Gudhate" },
-    ];
-    callback(200, users);
-  },
-  default: (data, callback) => {
-    const message = {
-      h2: "What's added",
+const express = require("express");
+const router = express.Router();
+
+// GET
+router.get("/", (req, res) => {
+  res.send({
+    h2: "What's added",
+    ul: {
+      li: "Web Frameworks",
       ul: {
-        li: "Node Basics",
-        ul: {
-          li: ["Buffer"],
-        },
+        li: ["Express.js"],
       },
-    };
+    },
+  });
+});
 
-    callback(200, message);
-  },
-};
+// GET
+router.get("/users", (req, res) => {
+  const users = [
+    { id: 1, name: "Navanath Jadhav" },
+    { id: 2, name: "Akshay Gudhate" },
+  ];
+  res.json(users);
+});
 
-module.exports = routes;
+// GET
+router.get("/hello", (req, res) => {
+  res.send("Hello, World!");
+});
+
+// EXPORT
+module.exports = router;
