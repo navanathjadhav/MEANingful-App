@@ -1,27 +1,31 @@
 const express = require("express");
+const {
+  getUsers,
+  getHome,
+  getUser,
+  saveUser,
+  updateUser,
+  removeUser,
+} = require("./users");
 const router = express.Router();
 
 // GET
-router.get("/", (req, res) => {
-  res.send({
-    h2: "What's added",
-    ul: {
-      li: "Web Frameworks",
-      ul: {
-        li: ["Express.js"],
-      },
-    },
-  });
-});
+router.get("/", getHome);
 
 // GET
-router.get("/users", (req, res) => {
-  const users = [
-    { id: 1, name: "Navanath Jadhav" },
-    { id: 2, name: "Akshay Gudhate" },
-  ];
-  res.json(users);
-});
+router.get("/users", getUsers);
+
+// POST
+router.post("/users", saveUser);
+
+// GET
+router.get("/users/:id", getUser);
+
+// PATCH
+router.patch("/users/:id", updateUser);
+
+// DELETE
+router.delete("/users/:id", removeUser);
 
 // GET
 router.get("/hello", (req, res) => {

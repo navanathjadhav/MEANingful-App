@@ -1,3 +1,4 @@
+require("dotenv").config();
 const routes = require("./routes");
 const EventEmitter = require("events");
 const eventEmitter = new EventEmitter();
