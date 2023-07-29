@@ -1,22 +1,29 @@
 const mongoose = require("./database");
+const redisClient = require("./redis");
 
 const User = mongoose.model("User", { name: String, email: String });
 
 const getHome = (req, res) => {
   res.send(`<h2>What's added</h2>
   <ul>
-      <li>Databases</li>
+      <li>Caching</li>
       <ul>
-          <li>NoSQL</li>
+          <li>Distributed Cache</li>
           <ul>
-              <li>MongoDB</li>
+              <li>Redis</li>
           </ul>
       </ul>
   </ul>`);
 };
 
 const getUsers = async (req, res) => {
-  const users = await User.find();
+  // Fetch the users from redis
+  const cachedUsers = await redisClient.get("users");
+  const users = cachedUsers ? JSON.parse(cachedUsers) : await User.find();
+  if (!cachedUsers) {
+    // Cache data in Redis for future use
+    redisClient.set("users", JSON.stringify(users));
+  }
   res.json(users);
 };
 
