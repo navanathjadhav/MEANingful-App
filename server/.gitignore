@@ -5,6 +5,10 @@
 npm-debug.log
 yarn-error.log
 
+# Logger
+combined.log
+error.log
+
 # IDEs and editors
 .idea/
 .project

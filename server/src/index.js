@@ -1,19 +1,20 @@
 require("dotenv").config();
 const routes = require("./routes");
-const EventEmitter = require("events");
-const eventEmitter = new EventEmitter();
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const morgan = require("morgan");
+const logger = require("./logger");
 
 // Body parser
 app.use(bodyParser.json());
 
-// Log the requests
-app.use((req, res) => {
-  eventEmitter.emit("request", req);
-  req.next();
-});
+// Used Morgan for HTTP request logging
+app.use(
+  morgan("combined", {
+    stream: { write: (message) => logger.info(message.trim()) },
+  })
+);
 
 // Use route here
 app.use("/", routes);
@@ -22,11 +23,6 @@ app.use("/", routes);
 // Get the port from the environment process object or use a default value
 const port = process.env.PORT || 3000;
 
-// Catch the event
-eventEmitter.on("request", (data) => {
-  console.log(`Received request for path: ${data.path}`);
-});
-
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  logger.info(`Server listening on port ${port}`);
 });

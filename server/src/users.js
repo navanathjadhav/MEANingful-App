@@ -6,12 +6,10 @@ const User = mongoose.model("User", { name: String, email: String });
 const getHome = (req, res) => {
   res.send(`<h2>What's added</h2>
   <ul>
-      <li>Caching</li>
+      <li>Log Frameworks</li>
       <ul>
-          <li>Distributed Cache</li>
-          <ul>
-              <li>Redis</li>
-          </ul>
+          <li>Winston</li>
+          <li>Morgan</li>
       </ul>
   </ul>`);
 };
