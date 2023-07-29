@@ -4,14 +4,22 @@ const redisClient = require("./redis");
 const User = mongoose.model("User", { name: String, email: String });
 
 const getHome = (req, res) => {
-  res.send(`<h2>What's added</h2>
-  <ul>
-      <li>Log Frameworks</li>
-      <ul>
-          <li>Winston</li>
-          <li>Morgan</li>
-      </ul>
-  </ul>`);
+  // Pass dynamic data to the Handlebars template
+  const data = {
+    title: "MEANingful",
+    message: "What's added",
+    ul: {
+      li1: "Template Engines",
+      li2: {
+        ul: {
+          li1: "Handlebars",
+        },
+      },
+    },
+  };
+
+  // Render the template with the dynamic data
+  res.render("index", data);
 };
 
 const getUsers = async (req, res) => {

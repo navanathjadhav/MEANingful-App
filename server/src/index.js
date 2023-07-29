@@ -2,6 +2,7 @@ require("dotenv").config();
 const routes = require("./routes");
 const express = require("express");
 const bodyParser = require("body-parser");
+const handlebars = require("express-handlebars");
 const app = express();
 const morgan = require("morgan");
 const logger = require("./logger");
@@ -15,6 +16,11 @@ app.use(
     stream: { write: (message) => logger.info(message.trim()) },
   })
 );
+
+// Set up Handlebars as the view engine
+app.engine(".hbs", handlebars.engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("views", "./views");
 
 // Use route here
 app.use("/", routes);
