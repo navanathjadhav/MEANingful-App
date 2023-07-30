@@ -7,30 +7,27 @@ const {
   updateUser,
   removeUser,
 } = require("./users");
+const { getSpaceXShips } = require("./launches");
 const router = express.Router();
 
-// GET
+/* ==================================================== */
+/* =======================HOME======================== */
+/* ==================================================== */
 router.get("/", getHome);
 
-// GET
+/* ==================================================== */
+/* =======================USERS======================== */
+/* ==================================================== */
 router.get("/users", getUsers);
-
-// POST
 router.post("/users", saveUser);
-
-// GET
 router.get("/users/:id", getUser);
-
-// PATCH
 router.patch("/users/:id", updateUser);
-
-// DELETE
 router.delete("/users/:id", removeUser);
 
-// GET
-router.get("/hello", (req, res) => {
-  res.send("Hello, World!");
-});
+/* ==================================================== */
+/* =======================SHIPS======================== */
+/* ==================================================== */
+router.get("/ships", getSpaceXShips);
 
 // EXPORT
 module.exports = router;

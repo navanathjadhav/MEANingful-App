@@ -9,10 +9,13 @@ const getHome = (req, res) => {
     title: "MEANingful",
     message: "What's added",
     ul: {
-      li1: "Template Engines",
+      li1: "API Clients",
       li2: {
         ul: {
-          li1: "Handlebars",
+          li1: "REST",
+          ul: {
+            li1: "Axios"
+          }
         },
       },
     },
