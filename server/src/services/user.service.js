@@ -1,14 +1,7 @@
-const redisClient = require("../config/redis");
 const User = require("../models/user.model");
 
 const getUsers = async () => {
-  // Fetch the users from redis
-  const cachedUsers = await redisClient.get("users");
-  const users = cachedUsers ? JSON.parse(cachedUsers) : await User.find();
-  if (!cachedUsers) {
-    // Cache data in Redis for future use
-    redisClient.set("users", JSON.stringify(users));
-  }
+  const users = await User.find();
   return users;
 };
 
@@ -18,9 +11,15 @@ const getUser = async (userId) => {
 };
 
 const updateUser = async (userId, payload) => {
-  const user = await User.findByIdAndUpdate(userId, {
-    $set: { ...payload },
-  });
+  const user = await getUser(userId);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  if (payload.email && (await User.isEmailTaken(payload.email, userId))) {
+    throw new Error("Email already taken");
+  }
+  Object.assign(user, payload);
+  await user.save();
   return user;
 };
 
@@ -30,9 +29,18 @@ const removeUser = async (userId) => {
 };
 
 const saveUser = async (payload) => {
-  const newUser = new User({ name: payload.name, email: payload.name });
-  const savedUser = await newUser.save();
-  return savedUser;
+  if (await User.isEmailTaken(payload.email)) {
+    throw new Error("Email already taken");
+  }
+  return User.create({
+    name: payload.name,
+    email: payload.email,
+    password: payload.password,
+  });
+};
+
+const getUserByEmail = async (email) => {
+  return User.findOne({ email });
 };
 
 module.exports = {
@@ -41,4 +49,5 @@ module.exports = {
   getUser,
   removeUser,
   updateUser,
+  getUserByEmail,
 };
