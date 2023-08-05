@@ -1,4 +1,4 @@
-const redisClient = require("./redis");
+const redisClient = require("../config/redis");
 const axios = require("axios"); // Require Axios
 
 const getSpaceXShips = async (req, res) => {

@@ -1,11 +1,11 @@
 require("dotenv").config();
-const routes = require("./routes");
+const routes = require("./routes/index");
 const express = require("express");
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
 const app = express();
 const morgan = require("morgan");
-const logger = require("./logger");
+const logger = require("./config/logger");
 
 // Body parser
 app.use(bodyParser.json());
