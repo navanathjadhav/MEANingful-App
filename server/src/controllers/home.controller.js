@@ -4,16 +4,11 @@ const getHome = (req, res) => {
     title: "MEANingful",
     message: "What's added",
     ul: {
-      li1: "Good to Know Libraries",
+      li1: "Real-Time Communication",
       li2: {
         ul: {
-          li1: "passport",
-          li2: "passport-jwt",
-          li3: "pm2",
-          li4: "bcryptjs",
-          li5: "jsonwebtoken",
-          li6: "validator",
-          li7: "moment",
+          li1: "socket.io",
+          li2: "socket.io-client",
         },
       },
     },

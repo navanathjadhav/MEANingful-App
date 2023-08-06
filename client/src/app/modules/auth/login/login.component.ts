@@ -49,6 +49,15 @@ export class LoginComponent implements OnInit {
     }
 
     this.isLoading = true
-    this.authService.login()
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      }
+    }
+    )
   }
 }

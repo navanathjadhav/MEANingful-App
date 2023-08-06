@@ -34,19 +34,6 @@
       </div>
       <div class="field">
         <div class="control">
-          <label class="label" for="company">Company</label>
-          <input type="text" class="input" formControlName="company" [ngClass]="{
-              'is-danger':
-                registerForm.controls['company'].touched &&
-                registerForm.controls['company'].invalid,
-              'is-success': registerForm.controls['company'].valid
-            }">
-          <p *ngIf="registerForm.controls['company'].touched &&
-            registerForm.controls['company'].invalid" class="help is-danger">This company is invalid</p>
-        </div>
-      </div>
-      <div class="field">
-        <div class="control">
           <label class="label" for="email">Email</label>
           <input type="email" class="input" formControlName="email" [ngClass]="{
               'is-danger':

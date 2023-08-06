@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '../modules/core/core.module';
 
 
 
@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    CoreModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

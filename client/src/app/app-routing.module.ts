@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { NoAuthGuard } from './modules/auth/guards/no-auth.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +14,7 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
+    canActivate: [NoAuthGuard],
     children: [
       {
         path: '',
@@ -23,6 +26,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: AppLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

@@ -24,6 +24,7 @@
     "passport-jwt": "^4.0.1",
     "pm2": "^5.3.0",
     "redis": "^4.6.7",
+    "socket.io": "^4.7.2",
     "validator": "^13.11.0",
     "winston": "^3.10.0"
   }

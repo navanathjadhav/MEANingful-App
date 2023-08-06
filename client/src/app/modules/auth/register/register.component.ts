@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   errorMessage!: string
   successMessage!: string
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -23,14 +24,6 @@ export class RegisterComponent implements OnInit {
   initForm() {
     this.registerForm = this.formBuilder.group({
       name: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ]),
-      ],
-      company: [
         '',
         Validators.compose([
           Validators.required,
@@ -67,9 +60,16 @@ export class RegisterComponent implements OnInit {
 
     this.isLoading = true
 
-    setTimeout(() => {
-      this.successMessage = `You have been registered successfully, please verify your email to activate the account.`
-      this.isLoading = false;
-    }, 2000);
+    this.authService.register(this.registerForm.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.successMessage = `You have been registered successfully, please verify your email to activate the account.`
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      }
+    }
+    )
   }
 }
