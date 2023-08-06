@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,7 +14,7 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage!: string
   successMessage!: string
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -41,10 +42,17 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     this.isLoading = true
-    setTimeout(() => {
-      this.successMessage = 'We have sent you the reset password link on given email.'
-      this.isLoading = false;
-    }, 2000);
+    this.authService.forgotPassword(this.forgotPasswordForm.value.email).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.successMessage = 'We have sent you the reset password link on given email.'
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      }
+    }
+    )
   }
 
 }

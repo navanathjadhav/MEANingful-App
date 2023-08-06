@@ -4,11 +4,11 @@ const getHome = (req, res) => {
     title: "MEANingful",
     message: "What's added",
     ul: {
-      li1: "Real-Time Communication",
+      li1: "Features",
       li2: {
         ul: {
-          li1: "socket.io",
-          li2: "socket.io-client",
+          li1: "Forgot password",
+          li2: "Reset password",
         },
       },
     },

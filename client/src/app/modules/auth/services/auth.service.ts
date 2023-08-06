@@ -61,6 +61,19 @@ export class AuthService {
       }));
   }
 
+
+  forgotPassword(email: string) {
+    return this.httpService.post('/api/auth/forgot-password', { email });
+  }
+
+  resetPassword(password: string, token: string) {
+    return this.httpService.post(`/api/auth/reset-password?token=${token}`, { password });
+  }
+
+  verifyResetPassword(token: string) {
+    return this.httpService.get(`/api/auth/reset-password?token=${token}`);
+  }
+
   logout() {
     // remove user from local storage to log user out
     const decodedToken: any = jwt_decode(this.getToken() as any)

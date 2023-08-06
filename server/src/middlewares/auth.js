@@ -12,7 +12,7 @@ const jwtOptions = {
 
 passport.use(
   new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
-    const user = await User.findById(jwtPayload.sub);
+    const user = await User.findById(jwtPayload.sub).select({ password: 0 });
     if (user) {
       return done(null, user);
     } else {
