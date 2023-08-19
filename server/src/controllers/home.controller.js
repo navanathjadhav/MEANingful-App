@@ -4,13 +4,10 @@ const getHome = (req, res) => {
     title: "MEANingful",
     message: "What's added",
     ul: {
-      li1: "MicroServices",
+      li1: "Task Scheduling",
       li2: {
         ul: {
-          li1: "Message-Broker",
-          ul: {
-            li1: "RabbitMQ",
-          },
+          li1: "node-schedule",
         },
       },
     },

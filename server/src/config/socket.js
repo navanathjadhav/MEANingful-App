@@ -71,6 +71,12 @@ function createSocketConnection(server) {
   });
 }
 
+// Emit drink water reminder to client
+function emitRemindToDrinkWater() {
+  io.sockets.emit("drinkWaterReminder", true);
+}
+
 module.exports = {
   createSocketConnection,
+  emitRemindToDrinkWater,
 };

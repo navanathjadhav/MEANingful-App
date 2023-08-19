@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { SocketService } from '../../core/services/socket.service';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -13,7 +14,8 @@ import * as moment from 'moment';
 export class HomeDashboardComponent implements OnInit {
   ships: Ship[] = []
   latestShips: Ship[] = []
-  constructor(private http: HttpClient) { }
+  showDrinkWater!: boolean
+  constructor(private http: HttpClient, private socketService: SocketService) { }
 
   getSpaceXShips() {
     this.http.get(environment.SPACEX_API_URL).subscribe({
@@ -29,6 +31,14 @@ export class HomeDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSpaceXShips();
+    setTimeout(() => {
+      this.listenToReminder();
+    }, 1500);
   }
 
+  listenToReminder() {
+    this.socketService.socket.on('drinkWaterReminder', (socketResponse: boolean) => {
+      this.showDrinkWater = socketResponse
+    });
+  }
 }

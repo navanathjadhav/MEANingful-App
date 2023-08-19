@@ -1,13 +1,20 @@
 <!-- Bulma css classes -->
 <div class="content">
+
+  <div class="columns ml-2" *ngIf="showDrinkWater">
+    <div class="notification is-success">
+      <button class="delete" (click)="showDrinkWater=false"></button>
+      Drink the water!
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
   <h2 class="title">What's added</h2>
   <ul>
-    <li>MicroServices</li>
+    <li>Task Scheduling</li>
     <ul>
-      <li>Message-Broker</li>
-      <ul>
-        <li>RabbitMQ</li>
-      </ul>
+      <li>node-schedule</li>
     </ul>
   </ul>
 

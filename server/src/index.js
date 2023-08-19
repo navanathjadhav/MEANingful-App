@@ -46,3 +46,4 @@ const server = app.listen(port, () => {
 });
 
 createSocketConnection(server);
+require("./config/schedule");
