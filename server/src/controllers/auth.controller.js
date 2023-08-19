@@ -1,5 +1,5 @@
 const { authService, userService, tokenService } = require("../services");
-const logger = require("../config/logger");
+const { publishMessage } = require("../config/rabbitMQ");
 
 const register = async (req, res) => {
   try {
@@ -40,8 +40,18 @@ const forgotPassword = async (req, res) => {
     const resetPasswordToken = await tokenService.generateResetPasswordToken(
       req.body.email
     );
-    const resetPasswordUrl = `${process.env.SITE_URL}/auth/reset-password?token=${resetPasswordToken}`;
-    logger.info(`[RESET_PWD]: ${resetPasswordUrl}`);
+
+    const emailMessagePayload = {
+      operation: "sendResetPasswordEmail",
+      data: {
+        email: req.body.email,
+        token: resetPasswordToken,
+      },
+    };
+    /**
+     * Publish message to Rabbit MQ queue
+     */
+    publishMessage("emails", JSON.stringify(emailMessagePayload));
 
     res.status(201).send();
   } catch (error) {
