@@ -4,10 +4,13 @@ const getHome = (req, res) => {
     title: "MEANingful",
     message: "What's added",
     ul: {
-      li1: "Task Scheduling",
+      li1: "Testing",
       li2: {
         ul: {
-          li1: "node-schedule",
+          li1: "Unit Testing",
+          ul: {
+            li1: "Jest",
+          },
         },
       },
     },
