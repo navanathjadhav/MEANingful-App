@@ -1,5 +1,6 @@
 const { authService, userService, tokenService } = require("../services");
-const { publishMessage } = require("../config/rabbitMQ");
+const MessageQueue = require("../config/message.queue");
+const messageQueue = new MessageQueue();
 
 const register = async (req, res) => {
   try {
@@ -51,7 +52,7 @@ const forgotPassword = async (req, res) => {
     /**
      * Publish message to Rabbit MQ queue
      */
-    publishMessage("emails", JSON.stringify(emailMessagePayload));
+    messageQueue.publishMessage("emails", JSON.stringify(emailMessagePayload));
 
     res.status(201).send();
   } catch (error) {
