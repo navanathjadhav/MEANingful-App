@@ -18,7 +18,7 @@ export class HomeDashboardComponent implements OnInit {
   constructor(private http: HttpClient, private socketService: SocketService) { }
 
   getSpaceXShips() {
-    this.http.get(environment.SPACEX_API_URL).subscribe({
+    this.http.get(environment.API_URL + '/api/ships').subscribe({
       next: (shipsResponse) => {
         this.ships = shipsResponse as any
         this.latestShips = _.filter(shipsResponse, ((data: Ship) => moment(data.year_built, 'YYYY').isAfter("2014"))) as any

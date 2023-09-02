@@ -7,7 +7,7 @@ const getHome = (req, res) => {
       li1: "Design Patterns",
       li2: {
         ul: {
-          li1: "Factory",
+          li1: "Prototype",
         },
       },
     },
