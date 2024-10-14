@@ -13,7 +13,7 @@ This application includes the following features and concepts:
 - **User Authentication** with JWT (JSON Web Tokens)
 - **Caching** using **Redis** for performance optimization
 - **RabbitMQ** for message queue implementation (for background tasks and notifications)
-- **Real-time features** using WebSockets
+- **Real-time features** using Socket.IO
 
 ## Getting Started
 
