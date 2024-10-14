@@ -32,7 +32,7 @@ Make sure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/navanathjadhav/MEANingful-App.git
+   git clone git@github.com:navanathjadhav/MEANingful-App.git
    cd MEANingful-App
    ```
 
@@ -55,7 +55,7 @@ Make sure you have the following installed:
 
 3. **Frontend Setup (Angular)**
 
-   - Open new terminal window and go to project directory
+   - Open a new terminal window and go to the project directory
    - Install dependencies:
 
    ```bash
@@ -71,7 +71,7 @@ Make sure you have the following installed:
 
 4. **Set Up MongoDB, Redis, and RabbitMQ**
 
-   Make sure MongoDB, PostgreSQL, Redis, and RabbitMQ are running on your local machine or configure the connection to your cloud-hosted services.
+   Make sure MongoDB, PostgreSQL, Redis, and RabbitMQ are running on your local machine, or configure the connection to your cloud-hosted services.
 
 ### Usage
 
