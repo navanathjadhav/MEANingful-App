@@ -1,6 +1,6 @@
 # Real-World MEAN Application
 
-This application showcases various concepts from the book _"NODE.JS EXPRESS IN REAL WORLD"_ implemented in a real-world app. It demonstrates building a full-stack web application using the **MEAN Stack** (MongoDB, Express, Angular, and Node.js).
+This application showcases various concepts from the book [NODE.JS EXPRESS IN REAL WORLD](https://amzn.in/d/a4PCy4M) implemented in a real-world app. It demonstrates building a full-stack web application using the **MEAN Stack** (MongoDB, Express, Angular, and Node.js).
 
 ## Key Features
 
